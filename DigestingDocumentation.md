@@ -45,7 +45,6 @@ Manpages are stored in a centralized database. If you're curious, this database 
 
 The challenge in this level has a secret option that, when you use it, will cause the challenge to print the flag. You must learn this option through the man page for challenge!
 
-## My solve
 **Flag:** `pwn.college{wkdpSsZ4MTfdGGjSoWrGpgse88O.QX0EDO0wCN2EzNzEzW}`
 
 ## What I learned
@@ -59,13 +58,58 @@ Challenge Description : You can scroll man pages with the arrow keys (and PgUp/P
 
 Find the option that will give you the flag by reading the challenge man page. 
 
-## My solve
-**Flag:** `pwn.college{88UIdtAWFDr3zWdM_1HyUsEN0ln.QX1EDO0wiN0EzNzEzW}`
-
-I was provided in the problem statement that by using man command , I can search for the flag.
+**Flag:** `pwn.college{A9umteLt2I7M_ed4E7K1ydKLfRh.QX1EDO0wCN2EzNzEzW}`
 
 ```
 ```
 ## What I learned
-We can scroll man pages with the arrow keys (and PgUp/PgDn) and search with /. After searching, we can hit n to go to the next result and N to go to the previous result. Instead of /, we can use ? to search backwards!
+I learnt you can use / to search.
+
+
+# 5. Searching for manuals
+
+Challenge Description : This level is tricky: it hides the manpage for the challenge by randomizing its name. Luckily, all of the manpages are gathered in a searchable database, so you'll be able to search the man page database to find the hidden challenge man page! To figure out how to search for the right manpage, read the man page manpage by doing: man man!
+
+HINT 1: man man teaches you advanced usage of the man command itself, and you must use this knowledge to figure out how to search for the hidden manpage that will tell you how to use /challenge/challenge
+
+HINT 2: though the manpage is randomly named, you still actually use /challenge/challenge to get the flag!
+
+**Flag:** `pwn.college{k48tvYYtCpLY8IjEFZ1ZXm_xMQn.QX2EDO0wCN2EzNzEzW}`
+
+```
+```
+
+## What I learned
+I learnt how to use man man and then search for the flag.
+
+
+# 6. Helpful Programs
+
+Challenge Description : Some programs don't have a man page, but might tell you how to run them if invoked with a special argument. Usually, this argument is --help, but it can often be -h or, in rare cases, -?, help, or other esoteric values like /? (though that latter is more frequently encountered on Windows).
+
+In this level, you will practice reading a program's documentation with --help. Try it out!
+
+**Flag:** `pwn.college{skcFSBJvluIBxldG2L2w3c9Assk.QX3IDO0wCN2EzNzEzW}`
+
+```
+```
+
+## What I learned
+Some programs don't have a man page, but might tell you how to run them if invoked with a special argument. Usually, this argument is --help, but it can often be -h or, in rare cases, -?, help, or other esoteric values like /? 
+
+
+# 7. Help for Builtins
+
+Challenge Description : Some programs don't have a man page, but might tell you how to run them if invoked with a special argument. Usually, this argument is --help, but it can often be -h or, in rare cases, -?, help, or other esoteric values like /? (though that latter is more frequently encountered on Windows).
+
+In this level, you will practice reading a program's documentation with --help. Try it out!
+
+**Flag:** `pwn.college{EZFHIzO885EtWzodpxcy5ZI20pd.QX0ETO0wCN2EzNzEzW}`
+
+```
+```
+
+## What I learned
+Some commands, rather than being programs with man pages and help options, are built into the shell itself. These are called builtins. Builtins are invoked just like commands, but the shell handles them internally instead of launching other programs.
+ 
 
