@@ -539,7 +539,7 @@ pwn.college{8Autw6S51iEH6XARThV2h351X71.QXxQDM2wCN2EzNzEzW}
 I learnt how to split pipe stderr and stdout.
 
 
-# 14. Split-piping stderr and stdout
+# 14. Named pipes
 
 Challenge Description : You've learned about pipes using |, and you've seen that process substitution creates temporary named pipes (like /dev/fd/63). You can also create your own persistent named pipes that stick around on the filesystem! These are called FIFOs, which stands for First (byte) In, First (byte) Out.
 
@@ -581,15 +581,27 @@ HINT: The blocking behavior of FIFOs makes it hard to solve this challenge in a 
 
 
 ## My solve
-**Flag:** `pwn.college{8Autw6S51iEH6XARThV2h351X71.QXxQDM2wCN2EzNzEzW}`
+**Flag:** `pwn.college{IpE6Ppmn-keI8fH6izd430SCt1k.01MzMDOxwCN2EzNzEzW}`
 
 ```
-hacker@piping~split-piping-stderr-and-stdout:~$ /challenge/hack 2> >(/challenge/the) | /challenge/planet
-Congratulations, you have learned a redirection technique that even experts 
-struggle with! Here is your flag:
-pwn.college{8Autw6S51iEH6XARThV2h351X71.QXxQDM2wCN2EzNzEzW}
+terminal 1 : 
+
+hacker@piping~named-pipes:~$ mkfifo /tmp/flag_fifo
+hacker@piping~named-pipes:~$ /challenge/run > /tmp/flag_fifo
+You're successfully redirecting /challenge/run to a FIFO at /tmp/flag_fifo! 
+Bash will now try to open the FIFO for writing, to pass it as the stdout of 
+/challenge/run. Recall that operations on FIFOs will *block* until both the 
+read side and the write side is open, so /challenge/run will not actually be 
+launched until you start reading from the FIFO!
+
+terminal 2 :
+
+hacker@piping~named-pipes:~$ cat /tmp/flag_fifo
+You've correctly redirected /challenge/run's stdout to a FIFO at 
+/tmp/flag_fifo! Here is your flag:
+pwn.college{IpE6Ppmn-keI8fH6izd430SCt1k.01MzMDOxwCN2EzNzEzW}
 
 ```
 
 ## What I learned
-I learnt how to split pipe stderr and stdout.
+Persistent named pipes that stick around on the filesystem are called FIFOs, which stands for First (byte) In, First (byte) Out. These are named pipes. We can examine them like files and they persist until deleted unlike temp files. Any process can be written to them by path. FIFOs "block" any operations on them until both the read side of the pipe and the write side of the pipe are ready. Some key differences between fifos and files. FIFOs pass data directly between processes in memory - nothing is saved to disk, Once data is read from a FIFO, it's gone, automatic synchronization, order of write and read dont matter.
